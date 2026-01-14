@@ -1,0 +1,7 @@
+{
+  "name": "CampusPass",
+  "description": "All-in-one university event management and student pass system.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
