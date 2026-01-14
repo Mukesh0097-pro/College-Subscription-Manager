@@ -27,14 +27,14 @@ export const Signup: React.FC = () => {
             <div className="flex flex-col justify-center px-4 md:px-16 lg:px-24 py-12 bg-white z-10">
                 <div className="mb-8">
                     <Link to="/" className="flex items-center gap-2 text-primary w-fit">
-                        <Icon name="school" size={32} />
-                        <span className="text-xl font-bold text-text-main">CampusPass</span>
+                        <Icon name="subscriptions" size={32} />
+                        <span className="text-xl font-bold text-text-main">SubTrack</span>
                     </Link>
                 </div>
 
                 <div className="max-w-md w-full mx-auto">
-                    <h1 className="text-3xl font-bold text-text-main mb-2">Create an account</h1>
-                    <p className="text-slate-500 mb-8">Start your journey with CampusPass today.</p>
+                    <h1 className="text-3xl font-bold text-text-main mb-2">Create your SubTrack account</h1>
+                    <p className="text-slate-500 mb-8">Start tracking your subscriptions today.</p>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
@@ -125,13 +125,13 @@ export const Signup: React.FC = () => {
 
             {/* Right Side - Image/Background */}
             <div className="hidden lg:flex relative bg-slate-900 items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-40"></div>
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-40"></div>
                 <div className="relative z-10 p-12 text-white max-w-lg">
                     <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-8 border border-white/20">
-                        <Icon name="groups" size={32} />
+                        <Icon name="savings" size={32} />
                     </div>
                     <h2 className="text-4xl font-bold mb-6 leading-tight">Join the community.</h2>
-                    <p className="text-slate-300 text-lg leading-relaxed">Connect with peers, organize meetups, and make the most of your campus life with CampusPass.</p>
+                    <p className="text-slate-300 text-lg leading-relaxed">Connect with fellow users, share savings tips, and take control of your subscriptions with SubTrack.</p>
                 </div>
             </div>
         </div>

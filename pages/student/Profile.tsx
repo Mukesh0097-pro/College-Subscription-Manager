@@ -6,7 +6,7 @@ export const Profile: React.FC = () => {
     <div className="max-w-[1080px] w-full mx-auto p-4 md:p-8 flex flex-col gap-8 pb-20">
       <div className="flex flex-col gap-2">
          <h1 className="text-3xl md:text-4xl font-black text-text-main">Profile & Settings</h1>
-         <p className="text-text-secondary">Manage your account, membership, and preferences</p>
+         <p className="text-text-secondary">Manage your account, plan, and preferences</p>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -18,9 +18,9 @@ export const Profile: React.FC = () => {
                </div>
                <div className="text-center sm:text-left">
                   <h2 className="text-2xl font-bold text-text-main">Alex Johnson</h2>
-                  <p className="text-text-secondary font-medium">Computer Science Dept</p>
+                  <p className="text-text-secondary font-medium">Pro User since 2024</p>
                   <div className="flex items-center justify-center sm:justify-start gap-2 text-sm text-text-secondary mt-1">
-                     <Icon name="badge" size={18} /> <span>ID: 2024-8891</span>
+                     <Icon name="badge" size={18} /> <span>ID: USR-8891</span>
                   </div>
                </div>
             </div>
@@ -34,7 +34,7 @@ export const Profile: React.FC = () => {
          <div className="lg:col-span-2 flex flex-col gap-6">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="text-lg font-bold">Membership Status</h3>
+                  <h3 className="text-lg font-bold">Plan Status</h3>
                   <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase rounded-full">Active</span>
                </div>
                <div className="p-6 flex flex-col gap-6">
@@ -42,8 +42,8 @@ export const Profile: React.FC = () => {
                      <div className="flex gap-4">
                         <div className="p-3 bg-primary/10 rounded-full text-primary"><Icon name="workspace_premium" /></div>
                         <div>
-                           <p className="font-bold text-text-main">CampusPass Premium</p>
-                           <p className="text-sm text-text-secondary mt-1">Semester Plan • Valid until Dec 15, 2023</p>
+                           <p className="font-bold text-text-main">SubTrack Pro</p>
+                           <p className="text-sm text-text-secondary mt-1">Monthly Plan • Valid until Jan 14, 2027</p>
                         </div>
                      </div>
                      <button className="h-9 px-4 bg-primary text-white text-sm font-medium rounded-lg shadow-sm">Manage</button>
@@ -76,9 +76,9 @@ export const Profile: React.FC = () => {
                <div className="p-6 border-b border-gray-200"><h3 className="text-lg font-bold">Notifications</h3></div>
                <div className="p-6 space-y-5">
                   {[
-                     { l: 'Event Reminders', d: 'Get notified before events start' },
-                     { l: 'Library Due Dates', d: 'Alerts for book returns' },
-                     { l: 'Weekly Digest', d: 'Summary of campus news', off: true }
+                     { l: 'Renewal Reminders', d: 'Get notified before renewals' },
+                     { l: 'Spending Alerts', d: 'Alerts for spending limits' },
+                     { l: 'Weekly Digest', d: 'Summary of spending', off: true }
                   ].map((item, i) => (
                      <div key={i} className="flex items-center justify-between">
                         <div><p className="text-sm font-medium">{item.l}</p><p className="text-xs text-text-secondary">{item.d}</p></div>

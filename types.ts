@@ -4,20 +4,19 @@ export enum UserRole {
   GUEST = 'GUEST'
 }
 
-export interface Event {
+export interface Subscription {
   id: string;
-  title: string;
-  date: string;
-  time: string;
-  location: string;
-  category: 'Workshop' | 'Social' | 'Academic' | 'Career' | 'Networking';
-  image: string;
+  name: string;
+  renewalDate: string;
+  billingCycle: string;
+  provider: string;
+  category: 'Entertainment' | 'Productivity' | 'Fitness' | 'Utilities' | 'Other';
+  logo: string;
   price: number;
   isFree: boolean;
-  isGoldOnly: boolean;
-  seatsTotal: number;
-  seatsBooked: number;
-  description?: string;
+  isProOnly: boolean;
+  status: 'Active' | 'Trial' | 'Cancelled' | 'Paused';
+  notes?: string;
 }
 
 export interface User {
@@ -26,7 +25,7 @@ export interface User {
   email: string;
   avatar: string;
   role: UserRole;
-  membershipTier: 'Free' | 'Silver' | 'Gold';
+  membershipTier: 'Free' | 'Pro';
 }
 
 export interface Ticket {

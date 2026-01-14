@@ -17,13 +17,13 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children, role }) => {
   const basePath = isAdmin ? '/admin' : '/student';
 
   const menuItems = isAdmin ? [
-    { icon: 'dashboard', label: 'Dashboard', path: '/admin' },
-    { icon: 'calendar_month', label: 'Manage Events', path: '/admin/events' },
-    { icon: 'qr_code_scanner', label: 'Scanner', path: '/admin/scanner' },
+    { icon: 'dashboard', label: 'Overview', path: '/admin' },
+    { icon: 'receipt_long', label: 'Manage Subscriptions', path: '/admin/events' },
+    { icon: 'insights', label: 'Analytics', path: '/admin/scanner' },
   ] : [
-    { icon: 'dashboard', label: 'Dashboard', path: '/student' },
-    { icon: 'explore', label: 'Explore', path: '/student/explore' },
-    { icon: 'confirmation_number', label: 'My Tickets', path: '/student/ticket' },
+    { icon: 'dashboard', label: 'Overview', path: '/student' },
+    { icon: 'subscriptions', label: 'Subscriptions', path: '/student/explore' },
+    { icon: 'notifications_active', label: 'Reminders', path: '/student/ticket' },
     { icon: 'person', label: 'Profile', path: '/student/profile' },
   ];
 
@@ -41,11 +41,11 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children, role }) => {
       `}>
         <div className="flex h-16 items-center gap-3 px-6 border-b border-gray-100">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <Icon name="school" />
+            <Icon name="subscriptions" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-text-main">CampusPass</h1>
-            <p className="text-xs text-text-secondary">{isAdmin ? 'Admin Portal' : 'Student Portal'}</p>
+            <h1 className="text-base font-bold text-text-main">SubTrack</h1>
+            <p className="text-xs text-text-secondary">{isAdmin ? 'Insights Dashboard' : 'User Dashboard'}</p>
           </div>
         </div>
 
@@ -80,8 +80,8 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children, role }) => {
               }}
             ></div>
             <div className="flex flex-col overflow-hidden min-w-0">
-              <p className="truncate text-sm font-bold text-text-main">{isAdmin ? 'James Admin' : 'Alex M.'}</p>
-              <p className="truncate text-xs text-text-secondary">{isAdmin ? 'Event Manager' : 'CS Major'}</p>
+              <p className="truncate text-sm font-bold text-text-main">{isAdmin ? 'James Owner' : 'Alex M.'}</p>
+              <p className="truncate text-xs text-text-secondary">{isAdmin ? 'Account Owner' : 'Pro User'}</p>
             </div>
             <button onClick={handleLogout} className="ml-auto text-text-secondary hover:text-primary">
               <Icon name="logout" size={20} />
@@ -98,7 +98,7 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children, role }) => {
             <button onClick={() => setIsMobileMenuOpen(true)} className="text-text-main">
               <Icon name="menu" />
             </button>
-            <h2 className="text-lg font-bold text-text-main">CampusPass</h2>
+            <h2 className="text-lg font-bold text-text-main">SubTrack</h2>
           </div>
           <div className="h-8 w-8 rounded-full bg-cover bg-center bg-gray-200"
                style={{ backgroundImage: isAdmin 
