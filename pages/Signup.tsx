@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { SignUp, useAuth } from '@clerk/clerk-react';
 import { Icon } from '../components/Icon';
 
 export const Signup: React.FC = () => {
+    const { isSignedIn, isLoaded } = useAuth();
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
-    };
+    useEffect(() => {
+        if (isLoaded && isSignedIn) {
+            navigate('/student');
+        }
+    }, [isSignedIn, isLoaded, navigate]);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // For now, just navigate to login or dashboard
-        navigate('/student');
-    };
+    // Show loading while checking auth status
+    if (!isLoaded) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-background-light">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+        );
+    }
+
+    // If already signed in, show redirect message
+    if (isSignedIn) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-background-light">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                    <p className="text-slate-600">Redirecting to dashboard...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-background-light">
@@ -36,85 +49,29 @@ export const Signup: React.FC = () => {
                     <h1 className="text-3xl font-bold text-text-main mb-2">Create your SubTrack account</h1>
                     <p className="text-slate-500 mb-8">Start tracking your subscriptions today.</p>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-medium text-text-main" htmlFor="name">Full Name</label>
-                            <div className="relative">
-                                <input
-                                    id="name"
-                                    type="text"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className="w-full h-11 pl-10 pr-4 rounded-lg border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
-                                    placeholder="John Doe"
-                                    required
-                                />
-                                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                                    <Icon name="person" size={20} />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-medium text-text-main" htmlFor="email">Email</label>
-                            <div className="relative">
-                                <input
-                                    id="email"
-                                    type="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="w-full h-11 pl-10 pr-4 rounded-lg border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
-                                    placeholder="john@university.edu"
-                                    required
-                                />
-                                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                                    <Icon name="mail" size={20} />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-medium text-text-main" htmlFor="password">Password</label>
-                            <div className="relative">
-                                <input
-                                    id="password"
-                                    type="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    className="w-full h-11 pl-10 pr-4 rounded-lg border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
-                                    placeholder="Create a password"
-                                    required
-                                />
-                                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                                    <Icon name="lock" size={20} />
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" className="h-11 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg shadow-lg shadow-primary/30 transition-all flex items-center justify-center gap-2 mt-2">
-                            Create Account
-                        </button>
-                    </form>
-
-                    <div className="relative my-8">
-                        <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-slate-100"></div>
-                        </div>
-                        <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-slate-400">Or sign up with</span>
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                        <button className="h-11 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
-                            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-                            <span className="text-sm font-medium text-text-main">Google</span>
-                        </button>
-                        <button className="h-11 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
-                            <Icon name="apple" size={20} />
-                            <span className="text-sm font-medium text-text-main">Apple</span>
-                        </button>
-                    </div>
+                    {/* Clerk Sign Up Component */}
+                    <SignUp 
+                        appearance={{
+                            elements: {
+                                rootBox: "w-full",
+                                card: "shadow-none p-0 w-full",
+                                headerTitle: "hidden",
+                                headerSubtitle: "hidden",
+                                socialButtonsBlockButton: "h-11 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors",
+                                socialButtonsBlockButtonText: "text-sm font-medium text-text-main",
+                                dividerLine: "bg-slate-100",
+                                dividerText: "text-slate-400 text-sm",
+                                formFieldLabel: "text-sm font-medium text-text-main",
+                                formFieldInput: "h-11 rounded-lg border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10",
+                                formButtonPrimary: "h-11 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg shadow-lg shadow-primary/30",
+                                footerAction: "hidden",
+                                footer: "hidden",
+                            },
+                        }}
+                        routing="hash"
+                        signInUrl="/login"
+                        fallbackRedirectUrl="/student"
+                    />
 
                     <p className="mt-8 text-center text-sm text-slate-600">
                         Already have an account?{' '}

@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/subscriptions/:id", "destination": "/api/subscriptions/[[...params]]" },
+    { "source": "/api/subscriptions", "destination": "/api/subscriptions/[[...params]]" }
+  ]
+}

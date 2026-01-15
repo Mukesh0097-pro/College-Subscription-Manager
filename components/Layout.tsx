@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useClerk, useUser } from '@clerk/clerk-react';
 import { Icon } from './Icon';
 import { UserRole } from '../types';
 
@@ -11,6 +12,8 @@ interface LayoutProps {
 export const DashboardLayout: React.FC<LayoutProps> = ({ children, role }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { signOut } = useClerk();
+  const { user } = useUser();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isAdmin = role === UserRole.ADMIN;
@@ -27,9 +30,14 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children, role }) => {
     { icon: 'person', label: 'Profile', path: '/student/profile' },
   ];
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await signOut();
     navigate('/');
   };
+
+  // Get user info from Clerk
+  const userName = user?.firstName || user?.emailAddresses?.[0]?.emailAddress?.split('@')[0] || 'User';
+  const userImage = user?.imageUrl;
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-background-light">
@@ -73,14 +81,11 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children, role }) => {
         <div className="p-4 border-t border-gray-100">
           <div className="flex items-center gap-3 p-2 rounded-lg border border-gray-100 shadow-sm">
             <div 
-              className="h-9 w-9 rounded-full bg-cover bg-center" 
-              style={{ backgroundImage: isAdmin 
-                ? 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCg4fmxHR2juGWSytxFi3OcBdERLyWsG5Z8532k6H2wIs9W5e5Jij-W3_pcSboFAcHMUB-2PmTvDfrE3JdbvC1Uj-u8her429kSpKVaqVMrguKs296VX5HNxK_xYqoK1MS4V9hYEiKq7ZFropvd2eOsq04EqEClAQnpGLtRf-WQQ9rBA6X0pgDLsqsfHnJB27LlfXYIDOu_DzFDfiroK1BgDBEeuBNmSJEYuGy_4boMATDF7iEy2tDhVKvSICZGGe-vqIXrdP9xY0ly")' 
-                : 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOyvDfAV9ucRi7H-xSOuFvJ5nHojkBelRJzIULH7u1MoshpppsdfSJKoZ8I8ImIW9cDI4Yhd_YFwVvnBCzueW-9ll_0fMFRAn6qkx_2_CVsYEZDaqIboP3_yYxJFPs5tekwUSLg8u2nySZLrjcZ3AlIH5Ekb6uVxvIxm3jPwrfJ4aKDcMN0JqoIzOH3y5jHwXAC1QvuMzuZtPInbgZZzTLecVFjEKSX16pyXidcLKjrayjy03GsBgMbEwwO4rGyNlVlP-ww8kqWt10")' 
-              }}
+              className="h-9 w-9 rounded-full bg-cover bg-center bg-gray-200" 
+              style={{ backgroundImage: userImage ? `url("${userImage}")` : undefined }}
             ></div>
             <div className="flex flex-col overflow-hidden min-w-0">
-              <p className="truncate text-sm font-bold text-text-main">{isAdmin ? 'James Owner' : 'Alex M.'}</p>
+              <p className="truncate text-sm font-bold text-text-main">{userName}</p>
               <p className="truncate text-xs text-text-secondary">{isAdmin ? 'Account Owner' : 'Pro User'}</p>
             </div>
             <button onClick={handleLogout} className="ml-auto text-text-secondary hover:text-primary">

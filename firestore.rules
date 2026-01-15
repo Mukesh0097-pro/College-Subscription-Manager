@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Subscriptions - access controlled via Cloud Functions
+    // These rules are backup security; main auth is in Cloud Functions
+    match /subscriptions/{subscriptionId} {
+      allow read, write: if false; // All access via Cloud Functions
+    }
+  }
+}

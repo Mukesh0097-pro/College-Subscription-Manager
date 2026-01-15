@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build output
+lib/
+
+# Environment files
+.env
+.env.local
+
+# Service account keys (NEVER commit these!)
+serviceAccountKey.json
+*-firebase-adminsdk-*.json
+
+# Firebase
+.runtimeconfig.json
