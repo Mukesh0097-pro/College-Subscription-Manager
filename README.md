@@ -1,20 +1,81 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# SubTrack - Subscription Tracking Platform
 
-# Run and deploy your AI Studio app
+A full-stack subscription tracking platform with separate frontend and backend services.
 
-This contains everything you need to run your app locally.
+## Project Structure
 
-View your app in AI Studio: https://ai.studio/apps/drive/1bPcmyy0LiKvnjIjZcoTOcNRP-6w837xA
+```
+.
+├── frontend/          # React frontend application
+├── backend/           # Express backend API
+├── firebase.json      # Firebase configuration
+├── firestore.rules    # Firestore security rules
+└── README.md         # This file
+```
 
-## Run Locally
+## Quick Start
 
-**Prerequisites:**  Node.js
+### Backend Setup
 
+```bash
+cd backend
+npm install
+cp .env.example .env
+# Edit .env with your credentials
+npm run dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Backend runs on: `http://localhost:5000`
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+# Create .env with VITE_CLERK_PUBLISHABLE_KEY
+npm run dev
+```
+
+Frontend runs on: `http://localhost:3000`
+
+## Features
+
+### Backend
+- RESTful API with Express & TypeScript
+- Clerk authentication
+- Firebase Firestore database
+- Comprehensive logging with Winston
+- Rate limiting and security headers
+- Full CRUD for subscriptions, users, notifications
+- Analytics and spending trends
+
+### Frontend
+- React 18 with TypeScript
+- Vite for fast development
+- Clerk authentication
+- React Router for navigation
+- Role-based dashboards (Student/Admin)
+- Event management and ticketing
+
+## Documentation
+
+- [Backend Documentation](./backend/README.md)
+- [Frontend Documentation](./frontend/README.md)
+
+## Tech Stack
+
+**Frontend:**
+- React, TypeScript, Vite, React Router, Clerk
+
+**Backend:**
+- Node.js, Express, TypeScript, Firebase Admin, Clerk, Winston, Zod
+
+## Development
+
+1. Start backend: `cd backend && npm run dev`
+2. Start frontend: `cd frontend && npm run dev`
+3. Access app at `http://localhost:3000`
+
+## License
+
+MIT
